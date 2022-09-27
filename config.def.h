@@ -1,15 +1,19 @@
 /* modifier 0 means no modifier */
-static int surfuseragent    = 1;  /* Append Surf version to default WebKit user agent */
+static int surfuseragent    = 0;  /* Append Surf version to default WebKit user agent */
 static char *fulluseragent  = ""; /* Or override the whole user agent string */
-static char *scriptfile     = "~/.surf/script.js";
-static char *styledir       = "~/.surf/styles/";
-static char *certdir        = "~/.surf/certificates/";
-static char *cachedir       = "~/.surf/cache/";
-static char *cookiefile     = "~/.surf/cookies.txt";
+static char *scriptfile     = "~/.local/share/surf/script.js";
+static char *styledir       = "~/.local/share/surf/styles/";
+static char *certdir        = "~/.local/share/surf/certificates/";
+static char *cachedir       = "~/.local/share/surf/cache/";
+static char *cookiefile     = "~/.local/share/surf/cookies.txt";
 
 static SearchEngine searchengines[] = {
-	{ " ", "https://duckduckgo.com/?q=%s" },
-	{ "osrs ", "https://oldschool.runescape.wiki/?search=%s" },
+	{ ":d",  "https://duckduckgo.com/?q=%s" },
+    { ":s",  "https://startpage.com/do/search?q=%s" },
+    { ":se", "https://searx.neocities.org/?q=%s" },
+	{ ":wi", "https://wiby.me/?q=%s" },
+	{ ":w",  "https://en.wikipedia.org/w/index.php?search=%s" },
+	{ ":rw", "https://ru.wikipedia.org/w/index.php?search=%s" },
 };
 
 /* Webkit default features */
@@ -24,36 +28,36 @@ static Parameter defconfig[ParameterLast] = {
 	[AccessWebcam]        =       { { .i = 0 },     },
 	[Certificate]         =       { { .i = 0 },     },
 	[CaretBrowsing]       =       { { .i = 0 },     },
-	[CookiePolicies]      =       { { .v = "@Aa" }, },
-	[DarkMode]            =       { { .i = 0 },     },
+	[CookiePolicies]      =       { { .v = "@" }, },
+	[DarkMode]            =       { { .i = 1 },     },
 	[DefaultCharset]      =       { { .v = "UTF-8" }, },
 	[DiskCache]           =       { { .i = 1 },     },
 	[DNSPrefetch]         =       { { .i = 0 },     },
-	[Ephemeral]           =       { { .i = 0 },     },
+	[Ephemeral]           =       { { .i = 1 },     },
 	[FileURLsCrossAccess] =       { { .i = 0 },     },
-	[FontSize]            =       { { .i = 12 },    },
+	[FontSize]            =       { { .i = 16 },    },
 	[FrameFlattening]     =       { { .i = 0 },     },
 	[Geolocation]         =       { { .i = 0 },     },
 	[HideBackground]      =       { { .i = 0 },     },
-	[Inspector]           =       { { .i = 0 },     },
-	[Java]                =       { { .i = 1 },     },
-	[JavaScript]          =       { { .i = 1 },     },
+	[Inspector]           =       { { .i = 1 },     },
+	[Java]                =       { { .i = 0 },     },
+	[JavaScript]          =       { { .i = 0 },     },
 	[KioskMode]           =       { { .i = 0 },     },
 	[LoadImages]          =       { { .i = 1 },     },
 	[MediaManualPlay]     =       { { .i = 1 },     },
-	[PreferredLanguages]  =       { { .v = (char *[]){ NULL } }, },
+	[PreferredLanguages]  =       { { .v = (char *[]){ "en_US", "ru_RU", NULL } }, },
 	[RunInFullscreen]     =       { { .i = 0 },     },
 	[ScrollBars]          =       { { .i = 1 },     },
 	[ShowIndicators]      =       { { .i = 1 },     },
 	[SiteQuirks]          =       { { .i = 1 },     },
 	[SmoothScrolling]     =       { { .i = 0 },     },
 	[SpellChecking]       =       { { .i = 0 },     },
-	[SpellLanguages]      =       { { .v = ((char *[]){ "en_US", NULL }) }, },
+	[SpellLanguages]      =       { { .v = ((char *[]){ "en_US", "ru_RU", NULL }) }, },
 	[StrictTLS]           =       { { .i = 1 },     },
-	[Style]               =       { { .i = 1 },     },
+	[Style]               =       { { .i = 0 },     },
 	[WebGL]               =       { { .i = 0 },     },
 	[ZoomLevel]           =       { { .f = 1.0 },   },
-	[ClipboardNotPrimary] =				{ { .i = 1 },			},
+	[ClipboardNotPrimary] =       { { .i = 1 },     },
 };
 
 static UriParameters uriparams[] = {
@@ -128,7 +132,7 @@ static SiteSpecific certs[] = {
 	{ "://suckless\\.org/", "suckless.org.crt" },
 };
 
-#define MODKEY GDK_CONTROL_MASK
+#define MODKEY GDK_MOD1_MASK
 
 /* hotkeys */
 /*
