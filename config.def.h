@@ -9,8 +9,8 @@ static char *cookiefile     = "~/.local/share/surf/cookies.txt";
 
 static SearchEngine searchengines[] = {
 	{ ":d",  "https://duckduckgo.com/?q=%s" },
-    { ":s",  "https://startpage.com/do/search?q=%s" },
-    { ":se", "https://searx.neocities.org/?q=%s" },
+	{ ":s",  "https://startpage.com/do/search?q=%s" },
+	{ ":se", "https://searx.neocities.org/?q=%s" },
 	{ ":wi", "https://wiby.me/?q=%s" },
 	{ ":w",  "https://en.wikipedia.org/w/index.php?search=%s" },
 	{ ":rw", "https://ru.wikipedia.org/w/index.php?search=%s" },
