@@ -1,0 +1,6 @@
+surf
+patches
+*.o
+*.so
+*.orig
+*.rej
